@@ -32,6 +32,24 @@ int		check_overflow(char *num)
 	return (0);
 }
 
+int		check_duplicates(int argc, char **argv)
+{
+	int i;
+	int	j;
+
+	i = 0;
+	while (++i < argc)
+	{
+		j = i;
+		while (++j < argc)
+		{
+			if (ft_strcmp(argv[i], argv[j]) == 0)
+				return (1);
+		}
+	}
+	return (0);
+}
+
 t_stack	*create_struct(void)
 {
 	t_stack *a;
@@ -68,9 +86,10 @@ void	print_stack(t_stack *a)
 {
 	while (a)
 	{
-		ft_printf("%d\n", a->n);
+		ft_printf("%d ", a->n);
 		a = a->next;
 	}
+	ft_printf("\n");
 }
 
 int		error(void)
@@ -94,7 +113,11 @@ int	main(int argc, char **argv)
 		if (check_overflow(argv[i]))
 			return (error());
 	}
+	if (check_duplicates(argc, argv))
+		return (error());
 	a = create_stack(argc, argv);
+	print_stack(a);
+	sort(a);
 	print_stack(a);
 	return (0);
 }

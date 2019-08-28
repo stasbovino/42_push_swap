@@ -10,4 +10,7 @@ typedef struct	s_stack
 	struct s_stack	*next;
 }				t_stack;
 
+void		sort(t_stack *a);
+void		print_stack(t_stack *a);
+
 #endif
