@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:20:10 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/28 23:27:57 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/28 23:57:38 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,15 @@ void		quicksort(t_stack **a, t_stack **b, int size, char s)
 	if (size >= 1 && size <= 3)
 		return ;
 	count_push = separation(a, b, s, size);
-	ft_printf("\nafter sep:\n");
-	print_stack(*a);
-	print_stack(*b);
+//	ft_printf("\nafter sep:\n");
+//	print_stack(*a);
+//	print_stack(*b);
 	quicksort(a, b, size - count_push, 'a');
-	ft_printf("\nafter sort a:\n");
-	print_stack(*a);
+//	ft_printf("\nafter sort a:\n");
+//	print_stack(*a);
 	quicksort(a, b, count_push, 'b');
-	ft_printf("\nafter sort b:\n");
-	print_stack(*b);
+//	ft_printf("\nafter sort b:\n");
+//	print_stack(*b);
 }
 
 void		sort(t_stack **a)

@@ -6,13 +6,13 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:36:34 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 00:24:24 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/29 00:36:06 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int				push(t_stack **a, t_stack **b, char s)
+int				ch_push(t_stack **a, t_stack **b, char s)
 {
 	t_stack	*tmp;
 
@@ -22,7 +22,6 @@ int				push(t_stack **a, t_stack **b, char s)
 		(*a)->next = *b;
 		*b = *a;
 		*a = tmp;
-		ft_printf("pb\n");
 	}
 	else
 	{
@@ -30,12 +29,11 @@ int				push(t_stack **a, t_stack **b, char s)
 		(*b)->next = *a;
 		*a = *b;
 		*b = tmp;
-		ft_printf("pa\n");
 	}
 	return (1);
 }
 
-void			swap(t_stack **a, t_stack **b, char s)
+void			ch_swap(t_stack **a, t_stack **b, char s)
 {
 	int		tmp;
 
@@ -51,8 +49,4 @@ void			swap(t_stack **a, t_stack **b, char s)
 		(*b)->next->n = (*b)->n;
 		(*b)->n = tmp;
 	}
-	if (s == 'a')
-		ft_printf("sa\n");
-	else
-		ft_printf("sb\n");
 }

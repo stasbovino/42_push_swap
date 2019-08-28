@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:38:01 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/28 22:43:37 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/28 23:56:11 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static int	check_overflow(char *num)
 
 	overf = (num[0] == '-') ? "-2147483648" : "2147483647";
 	lenoverf = (num[0] == '-') ? 11 : 10;
-	if (ft_strlen(num) > lenoverf)
+	if ((int)ft_strlen(num) > lenoverf)
 		return (1);
-	else if (ft_strlen(num) < lenoverf)
+	else if ((int)ft_strlen(num) < lenoverf)
 		return (0);
 	i = (num[0] == '-') ? 0 : -1;
 	while (num[++i])
