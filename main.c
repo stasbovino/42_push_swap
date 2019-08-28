@@ -1,54 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/28 22:36:52 by gwyman-m          #+#    #+#             */
+/*   Updated: 2019/08/28 22:42:03 by gwyman-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-
-int		check_isnum(char *num)
-{
-	int i;
-
-	i = (num[0] == '-') ? 0 : -1;
-	while (num[++i])
-		if (!(num[i] >= '0' && num[i] <= '9'))
-			return (1);
-	return (0);
-}
-
-int		check_overflow(char *num)
-{
-	int		i;
-	char	*overf;
-	int		lenoverf;
-
-	overf = (num[0] == '-') ? "-2147483648" : "2147483647";
-	lenoverf = (num[0] == '-') ? 11 : 10;
-	if (ft_strlen(num) > lenoverf)
-		return (1);
-	else if (ft_strlen(num) < lenoverf)
-		return (0);
-	i = (num[0] == '-') ? 0 : -1;
-	while (num[++i])
-	{
-		if (num[i] > overf[i])
-			return (1);
-	}
-	return (0);
-}
-
-int		check_duplicates(int argc, char **argv)
-{
-	int i;
-	int	j;
-
-	i = 0;
-	while (++i < argc)
-	{
-		j = i;
-		while (++j < argc)
-		{
-			if (ft_strcmp(argv[i], argv[j]) == 0)
-				return (1);
-		}
-	}
-	return (0);
-}
 
 t_stack	*create_struct(void)
 {
@@ -98,26 +60,17 @@ int		error(void)
 	return (1);
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_stack *a;
-	int		i;
 
 	if (argc <= 1)
 		return (error());
-	i = 0;
-	while (++i < argc)
-	{
-		if (check_isnum(argv[i]))
-			return (error());
-		if (check_overflow(argv[i]))
-			return (error());
-	}
-	if (check_duplicates(argc, argv))
+	if (check_valid(argc, argv))
 		return (error());
 	a = create_stack(argc, argv);
 	print_stack(a);
-	sort(a);
+	sort(&a);
 	print_stack(a);
 	return (0);
 }
