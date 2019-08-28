@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:20:10 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/28 22:36:17 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/28 23:27:57 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ int			separation(t_stack **a, t_stack **b, char s, int size)
 	tmp = (s == 'a') ? *a : *b;
 	while (++i < size)
 	{
-		if (tmp->n < median)
+		if ((s == 'a' && tmp->n <= median) || (s == 'b' && tmp->n > median))
 			count_push += push(a, b, s);
 		else
 			count_rot += rotate(a, b, s);
+		tmp = (s == 'a') ? *a : *b;
 	}
 	while (count_rot != 0)
 		count_rot -= rev_rotate(a, b, s);
@@ -81,13 +82,18 @@ void		quicksort(t_stack **a, t_stack **b, int size, char s)
 		sort_two(a, b, s);
 	if (size == 3)
 		sort_three(a, b, s);
-	if ((size == 1 && s == 'a') || size == 3 || size == 2)
+	if (size >= 1 && size <= 3)
 		return ;
 	count_push = separation(a, b, s, size);
-	if (s == 'a')
-		quicksort(a, b, size - count_push, 'a');
-	else
-		quicksort(a, b, count_push, 'b');
+	ft_printf("\nafter sep:\n");
+	print_stack(*a);
+	print_stack(*b);
+	quicksort(a, b, size - count_push, 'a');
+	ft_printf("\nafter sort a:\n");
+	print_stack(*a);
+	quicksort(a, b, count_push, 'b');
+	ft_printf("\nafter sort b:\n");
+	print_stack(*b);
 }
 
 void		sort(t_stack **a)

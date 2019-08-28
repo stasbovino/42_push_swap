@@ -1,0 +1,2 @@
+gcc -g main.c sort.c oper_push_swap.c oper_rotates.c sort_for_onetwothree.c validation.c libft.a -o test
+./test $*
