@@ -6,7 +6,7 @@
 #    By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/28 23:35:25 by gwyman-m          #+#    #+#              #
-#    Updated: 2019/08/29 18:54:44 by gwyman-m         ###   ########.fr        #
+#    Updated: 2019/08/29 18:56:19 by gwyman-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ PUSH_SWAP = push_swap
 
 CHECKER = checker
 
-FLAGS = -g -I. -I libft/ -L libft/ -lft
+FLAGS = -g -Wall -Wextra -Werror -I. -I libft/ -L libft/ -lft
 
 PUSH_SWAP_SRC_DIR= src_push_swap/
 
