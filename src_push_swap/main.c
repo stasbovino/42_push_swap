@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:36:52 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 00:05:28 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/29 20:41:12 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,18 @@ t_stack	*create_stack(int argc, char **argv)
 	return (begin);
 }
 
+void	free_stack(t_stack **a)
+{
+	t_stack *tmp;
+
+	while (*a)
+	{
+		tmp = (*a)->next;
+		free(*a);
+		*a = tmp;
+	}
+}
+
 void	print_stack(t_stack *a)
 {
 	while (a)
@@ -69,8 +81,7 @@ int		main(int argc, char **argv)
 	if (check_valid(argc, argv))
 		return (error());
 	a = create_stack(argc, argv);
-//	print_stack(a);
 	sort(&a);
-//	print_stack(a);
+	free_stack(&a);
 	return (0);
 }

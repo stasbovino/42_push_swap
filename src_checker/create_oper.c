@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   oper_list.c                                        :+:      :+:    :+:   */
+/*   create_oper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 19:10:31 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 19:34:06 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/29 22:24:27 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static t_lst	*create_lst(char *a)
-{
-	t_lst *lst;
-
-	lst = (t_lst*)malloc(sizeof(t_lst));
-	if (a)
-		lst->s = ft_strdup(a);
-	else
-		lst->s = NULL;
-	lst->next = NULL;
-	return (lst);
-}
 
 static void		fill_oper(char ***oper, t_lst *lst)
 {
@@ -54,10 +41,11 @@ static void		fill_oper(char ***oper, t_lst *lst)
 	}
 }
 
-static int		checker_error(t_lst **lst)
+static int		checker_error(t_lst **lst, char **s)
 {
 	t_lst *tmp;
 
+	free(*s);
 	while (*lst)
 	{
 		free((*lst)->s);
@@ -68,29 +56,57 @@ static int		checker_error(t_lst **lst)
 	return (error());
 }
 
+void			clear_oper(char ***oper)
+{
+	int i;
+
+	i = -1;
+	while ((*oper)[++i])
+	{
+		free((*oper)[i]);
+	}
+	free(*oper);
+}
+
+int				read_to_lst(t_lst **begin, t_lst **lst)
+{
+	char	*buf;
+	int		r;
+
+	r = 0;
+	buf = ft_strnew(4);
+	while ((r = read(0, buf, 4)))
+	{
+		if (r == -1)
+			return (checker_error(begin, &buf));
+		if (r == 3)
+			buf[2] = '\0';
+		else if (r == 4)
+			buf[3] = '\0';
+		else
+			return (checker_error(begin, &buf));
+		(*lst)->next = create_lst(buf);
+		(*lst) = (*lst)->next;
+		free(buf);
+		buf = ft_strnew(4);
+		if (check_valid_oper((*lst)->s) == -1)
+			return (checker_error(begin, &buf));
+	}
+	free(buf);
+	return (0);
+}
+
 int				create_oper(char ***oper)
 {
 	int		i;
-	char	*buf;
-	int		r;
 	t_lst	*lst;
 	t_lst	*begin;
 
 	i = -1;
-	buf = NULL;
 	lst = create_lst(NULL);
 	begin = lst;
-	while ((r = get_next_line(0, &buf)))
-	{
-		if (r == -1)
-			return (checker_error(&lst));
-		lst->next = create_lst(buf);
-		lst = lst->next;
-		free(buf);
-		buf = NULL;
-		if (check_valid_oper(lst->s) == -1)
-			return (checker_error(&lst));
-	}
+	if (read_to_lst(&begin, &lst))
+		return (error());
 	fill_oper(oper, begin);
 	return (0);
 }

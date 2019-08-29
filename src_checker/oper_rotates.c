@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:36:27 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 00:37:06 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/29 20:22:00 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int				ch_rotate(t_stack **a, t_stack **b, char s)
 	t_stack	*last;
 	t_stack	*tmp;
 
-	if (s == 'a')
+	if (s == 'a' && *a && (*a)->next)
 	{
 		last = find_last(*a);
 		tmp = *a;
@@ -55,7 +55,7 @@ int				ch_rotate(t_stack **a, t_stack **b, char s)
 		tmp->next = NULL;
 		last->next = tmp;
 	}
-	if (s == 'b')
+	if (s == 'b' && *b && (*b)->next)
 	{
 		last = find_last(*b);
 		tmp = *b;
@@ -71,7 +71,7 @@ int				ch_rev_rotate(t_stack **a, t_stack **b, char s)
 	t_stack	*prev;
 	t_stack	*tmp;
 
-	if (s == 'a')
+	if (s == 'a' && *a && (*a)->next)
 	{
 		prev = find_prev(*a);
 		tmp = prev->next;
@@ -79,7 +79,7 @@ int				ch_rev_rotate(t_stack **a, t_stack **b, char s)
 		*a = tmp;
 		prev->next = NULL;
 	}
-	if (s == 'b')
+	if (s == 'b' && *b && (*b)->next)
 	{
 		prev = find_prev(*b);
 		tmp = prev->next;

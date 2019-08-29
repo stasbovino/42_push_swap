@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:36:34 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 00:24:24 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/29 20:25:16 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int				push(t_stack **a, t_stack **b, char s)
 {
 	t_stack	*tmp;
 
-	if (s == 'a')
+	if (s == 'a' && *a)
 	{
 		tmp = (*a)->next;
 		(*a)->next = *b;
@@ -24,7 +24,7 @@ int				push(t_stack **a, t_stack **b, char s)
 		*a = tmp;
 		ft_printf("pb\n");
 	}
-	else
+	else if (s == 'b' && *b)
 	{
 		tmp = (*b)->next;
 		(*b)->next = *a;
@@ -39,20 +39,22 @@ void			swap(t_stack **a, t_stack **b, char s)
 {
 	int		tmp;
 
-	if (s == 'a')
+	if (s == 'a' && *a && (*a)->next)
 	{
 		tmp = (*a)->next->n;
 		(*a)->next->n = (*a)->n;
 		(*a)->n = tmp;
+		ft_printf("sa\n");
 	}
-	if (s == 'b')
+	if (s == 'b' && *b && (*b)->next)
 	{
 		tmp = (*b)->next->n;
 		(*b)->next->n = (*b)->n;
 		(*b)->n = tmp;
+		ft_printf("sb\n");
 	}
-	if (s == 'a')
+/*	if (s == 'a')
 		ft_printf("sa\n");
 	else
-		ft_printf("sb\n");
+		ft_printf("sb\n");*/
 }

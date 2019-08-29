@@ -1,46 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   create_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/29 20:42:43 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 20:44:04 by gwyman-m         ###   ########.fr       */
+/*   Created: 2019/08/29 21:56:22 by gwyman-m          #+#    #+#             */
+/*   Updated: 2019/08/29 21:56:49 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	is_sorted(t_stack **a)
+t_lst			*create_lst(char *a)
 {
-	t_stack *tmp;
-	int		prev;
+	t_lst *lst;
 
-	if (!(*a))
-		return (0);
-	tmp = *a;
-	prev = tmp->n;
-	while (tmp)
-	{
-		if (prev <= tmp->n)
-			tmp = tmp->next;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-void		sort(t_stack **a)
-{
-	t_stack *b;
-	int		size;
-
-	b = NULL;
-	size = count_stacklen(*a);
-	if (size == 1)
-		return ;
-	if (is_sorted(a))
-		return ;
-	quicksort(a, &b, size, 'a');
+	lst = (t_lst*)malloc(sizeof(t_lst));
+	if (a)
+		lst->s = ft_strdup(a);
+	else
+		lst->s = NULL;
+	lst->next = NULL;
+	return (lst);
 }

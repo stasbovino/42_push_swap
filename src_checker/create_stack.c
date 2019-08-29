@@ -6,13 +6,13 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 19:14:12 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 19:14:38 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:59:43 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*create_struct(void)
+static t_stack	*create_struct(void)
 {
 	t_stack *a;
 
@@ -22,7 +22,19 @@ t_stack	*create_struct(void)
 	return (a);
 }
 
-t_stack	*create_stack(int argc, char **argv)
+void			free_stack(t_stack **a)
+{
+	t_stack *tmp;
+
+	while (*a)
+	{
+		tmp = (*a)->next;
+		free(*a);
+		*a = tmp;
+	}
+}
+
+t_stack			*create_stack(int argc, char **argv)
 {
 	t_stack *prev;
 	t_stack	*new;
