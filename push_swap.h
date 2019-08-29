@@ -10,6 +10,12 @@ typedef struct	s_stack
 	struct s_stack	*next;
 }				t_stack;
 
+typedef struct	s_lst
+{
+	char			*s;
+	struct s_lst	*next;
+}				t_lst;
+
 t_stack		*create_struct(void);
 t_stack		*create_stack(int argc, char **argv);
 int			error(void);
