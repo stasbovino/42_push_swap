@@ -6,7 +6,7 @@
 #    By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/28 23:35:25 by gwyman-m          #+#    #+#              #
-#    Updated: 2019/08/29 18:56:19 by gwyman-m         ###   ########.fr        #
+#    Updated: 2019/08/29 19:35:04 by gwyman-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ PUSH_SWAP = push_swap
 
 CHECKER = checker
 
-FLAGS = -g -Wall -Wextra -Werror -I. -I libft/ -L libft/ -lft
+FLAGS = -Wall -Wextra -Werror -I. -I libft/ -L libft/ -lft
 
 PUSH_SWAP_SRC_DIR= src_push_swap/
 
@@ -22,7 +22,8 @@ CHECKER_SRC_DIR= src_checker/
 
 CPUSH_SWAP= main.c oper_push_swap.c oper_rotates.c sort.c sort_for_onetwothree.c validation.c
 
-CCHECKER= main.c oper_push_swap.c oper_rotates.c validation.c
+CCHECKER= main.c oper_push_swap.c oper_rotates.c validation_stack.c apply_oper.c create_stack.c \
+		  oper_list.c validation_oper.c
 
 PUSH_SWAP_SRC = $(addprefix $(PUSH_SWAP_SRC_DIR),$(CPUSH_SWAP))
 

@@ -38,4 +38,11 @@ void		ch_swap(t_stack **a, t_stack **b, char s);
 int			ch_rotate(t_stack **a, t_stack **b, char s);
 int			ch_rev_rotate(t_stack **a, t_stack **b, char s);
 
+int			check_valid_oper(char *oper);
+int			create_oper(char ***oper);
+
+void		apply_s(t_stack **a, t_stack **b, char *oper);
+void		apply_r(t_stack **a, t_stack **b, char *oper);
+void		apply_p(t_stack **a, t_stack **b, char *oper);
+
 #endif
