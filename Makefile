@@ -6,7 +6,7 @@
 #    By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/28 23:35:25 by gwyman-m          #+#    #+#              #
-#    Updated: 2019/08/29 21:57:05 by gwyman-m         ###   ########.fr        #
+#    Updated: 2019/08/30 00:23:22 by sts              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ PUSH_SWAP = push_swap
 
 CHECKER = checker
 
-FLAGS = -g -Wall -Wextra -Werror -I. -I libft/ -L libft/ -lft
+#FLAGS = -g -Wall -Wextra -Werror -I. -I libft/ -L libft/ -lft
+FLAGS = -g -Wall -Wextra -Werror -I. -I libft/
+LIB = -L libft/ -lft
 
 PUSH_SWAP_SRC_DIR= src_push_swap/
 
@@ -34,11 +36,11 @@ all: $(PUSH_SWAP) $(CHECKER)
 
 $(PUSH_SWAP): $(PUSH_SWAP_SRC)
 	make -C libft/
-	gcc $(FLAGS) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP)
+	gcc $(FLAGS) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) $(LIB)
 
 $(CHECKER): $(CHECKER_SRC)
 	make -C libft/
-	gcc $(FLAGS) $(CHECKER_SRC) -o $(CHECKER)
+	gcc $(FLAGS) $(CHECKER_SRC) -o $(CHECKER) $(LIB)
 
 clean:
 	make clean -C libft/

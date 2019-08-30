@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 19:10:31 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 22:24:27 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/30 15:15:48 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static int		checker_error(t_lst **lst, char **s)
 		free(*lst);
 		*lst = tmp;
 	}
-	return (error());
+	get_next_line(0, NULL, 1);
+	return (1);
 }
 
 void			clear_oper(char ***oper)
@@ -68,6 +69,29 @@ void			clear_oper(char ***oper)
 	free(*oper);
 }
 
+int				read_to_lst(t_lst **begin, t_lst **lst)
+{
+	char	*buf;
+	int		r;
+
+	r = 0;
+	buf = NULL;
+	while ((r = get_next_line(0, &buf, 0)))
+	{
+		if (r == -1)
+			return (checker_error(begin, &buf));
+		(*lst)->next = create_lst(buf);
+		(*lst) = (*lst)->next;
+		free(buf);
+		buf = NULL;
+		if (check_valid_oper((*lst)->s) == -1)
+			return (checker_error(begin, &buf));
+	}
+	free(buf);
+	return (0);
+}
+
+/*
 int				read_to_lst(t_lst **begin, t_lst **lst)
 {
 	char	*buf;
@@ -95,14 +119,12 @@ int				read_to_lst(t_lst **begin, t_lst **lst)
 	free(buf);
 	return (0);
 }
-
+*/
 int				create_oper(char ***oper)
 {
-	int		i;
 	t_lst	*lst;
 	t_lst	*begin;
 
-	i = -1;
 	lst = create_lst(NULL);
 	begin = lst;
 	if (read_to_lst(&begin, &lst))

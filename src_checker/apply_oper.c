@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 19:31:33 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 19:34:22 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/30 15:53:46 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		apply_s(t_stack **a, t_stack **b, char *oper)
 {
 	if (oper[1] == 'a' || oper[1] == 's')
 		ch_swap(a, b, 'a');
-	else if (oper[1] == 'b' || oper[1] == 's')
+	if (oper[1] == 'b' || oper[1] == 's')
 		ch_swap(a, b, 'b');
 }
 
@@ -24,12 +24,12 @@ void		apply_r(t_stack **a, t_stack **b, char *oper)
 {
 	if (oper[1] == 'a' || (oper[1] == 'r' && oper[2] == '\0'))
 		ch_rotate(a, b, 'a');
-	else if (oper[1] == 'b' || (oper[1] == 'r' && oper[2] == '\0'))
+	if (oper[1] == 'b' || (oper[1] == 'r' && oper[2] == '\0'))
 		ch_rotate(a, b, 'b');
-	else if ((oper[1] == 'r' && oper[2] == 'a') ||
+	if ((oper[1] == 'r' && oper[2] == 'a') ||
 			(oper[1] == 'r' && oper[2] == 'r'))
 		ch_rev_rotate(a, b, 'a');
-	else if ((oper[1] == 'r' && oper[2] == 'a') ||
+	if ((oper[1] == 'r' && oper[2] == 'b') ||
 			(oper[1] == 'r' && oper[2] == 'r'))
 		ch_rev_rotate(a, b, 'b');
 }
