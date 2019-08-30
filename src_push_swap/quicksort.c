@@ -6,13 +6,13 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:20:10 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 20:46:24 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/30 20:49:11 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int			count_stacklen(t_stack *a)
+int				count_stacklen(t_stack *a)
 {
 	int		i;
 	t_stack	*tmp;
@@ -27,7 +27,7 @@ int			count_stacklen(t_stack *a)
 	return (i);
 }
 
-int			count_median(t_stack *a, int size)
+long long int	count_median(t_stack *a, int size)
 {
 	int		i;
 	int		sum;
@@ -46,33 +46,38 @@ int			count_median(t_stack *a, int size)
 	return (ret);
 }
 
-int			separation(t_stack **a, t_stack **b, char s, int size)
+int				separation(t_stack **a, t_stack **b, char s, int size)
 {
-	int		median;
-	t_stack	*tmp;
-	int		i;
-	int		count_rot;
-	int		count_push;
+	long long int	median;
+	t_stack			*tmp;
+	int				i;
+	int				count_rot;
+	int				count_push;
 
 	i = -1;
 	count_push = 0;
 	count_rot = 0;
 	median = (s == 'a') ? count_median(*a, size) : count_median(*b, size);
-	tmp = (s == 'a') ? *a : *b;
+/*	ft_printf("median of %c is %d\na is: ", s, median);
+	print_stack(*a);
+	ft_printf("b is: ");
+	print_stack(*b);
+*/	tmp = (s == 'a') ? *a : *b;
 	while (++i < size)
 	{
-		if ((s == 'a' && tmp->n <= median) || (s == 'b' && tmp->n > median))
+		if ((s == 'a' && (tmp->n <= median)) || (s == 'b' && (tmp->n >= median)))
 			count_push += push(a, b, s);
 		else
 			count_rot += rotate(a, b, s);
 		tmp = (s == 'a') ? *a : *b;
 	}
-	while (count_rot != 0)
-		count_rot -= rev_rotate(a, b, s);
+	if (((s == 'a') ? count_stacklen(*a) : count_stacklen(*b)) != count_rot)
+		while (count_rot != 0)
+			count_rot -= rev_rotate(a, b, s);
 	return (count_push);
 }
 
-void		quicksort(t_stack **a, t_stack **b, int size, char s)
+void			quicksort(t_stack **a, t_stack **b, int size, char s)
 {
 	int		count_push;
 
@@ -83,8 +88,26 @@ void		quicksort(t_stack **a, t_stack **b, int size, char s)
 	if (size == 3)
 		sort_three(a, b, s);
 	if (size >= 1 && size <= 3)
-		return ;
+	{
+/*		ft_printf("\nsorted %d at %c:\na is: ", size, s);
+		print_stack(*a);
+		ft_printf("b is: ");
+		print_stack(*b);
+*/		return ;
+	}
 	count_push = separation(a, b, s, size);
-	quicksort(a, b, size - count_push, 'a');
-	quicksort(a, b, count_push, 'b');
+/*	ft_printf("\nseparated:\na is: ");
+	print_stack(*a);
+	ft_printf("b is: ");
+	print_stack(*b);
+*/	if (s == 'a')
+	{
+		quicksort(a, b, size - count_push, 'a');
+		quicksort(a, b, count_push, 'b');
+	}
+	if (s == 'b')
+	{
+		quicksort(a, b, count_push, 'a');
+		quicksort(a, b, size - count_push, 'b');
+	}
 }

@@ -11,6 +11,4 @@ awk -v loop=$1 -v range=10000 'BEGIN{
     }
   } while (count<loop)
 }' > kek.txt
-ARG=`cat kek.txt`; ./push_swap $ARG | ./checker $ARG
-printf "NUMBER OF LINES: "
-ARG=`cat kek.txt`; ./push_swap $ARG | wc -l
+ARG=`cat kek.txt`; ./push_swap $ARG 

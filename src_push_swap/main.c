@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:36:52 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/30 15:30:59 by sts              ###   ########.fr       */
+/*   Updated: 2019/08/30 19:23:04 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	free_stack(t_stack **a)
 
 void	print_stack(t_stack *a)
 {
+	if (!a)
+		ft_printf("stack is empty");
 	while (a)
 	{
 		ft_printf("%d ", a->n);

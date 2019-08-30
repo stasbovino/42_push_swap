@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 00:01:02 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/30 15:54:43 by sts              ###   ########.fr       */
+/*   Updated: 2019/08/30 18:09:59 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ static int	is_sorted(t_stack **a)
 	while (tmp)
 	{
 		if (prev <= tmp->n)
+		{
+			prev = tmp->n;
 			tmp = tmp->next;
+		}
 		else
 			return (0);
 	}
@@ -84,8 +87,8 @@ int			main(int argc, char **argv)
 	t_stack *b;
 	char	**oper;
 
-	if (argc <= 1)
-		return (error());
+	if (argc == 1)
+		return (1);
 	if (check_valid(argc, argv))
 		return (error());
 	oper = NULL;
@@ -95,14 +98,14 @@ int			main(int argc, char **argv)
 	b = NULL;
 	if (check(&a, &b, oper) == 1)
 	{
-//		print_stack(a);
-//		print_stack(b);
+		print_stack(a);
+		print_stack(b);
 		ft_printf("\x1b[32m[OK]\x1b[0m\n");
 	}
 	else
 	{
-//		print_stack(a);
-//		print_stack(b);
+		print_stack(a);
+		print_stack(b);
 		ft_printf("\x1b[31m[KO]\x1b[0m\n");
 	}
 	clear_oper(&oper);

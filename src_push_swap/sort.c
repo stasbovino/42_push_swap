@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 20:42:43 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 20:44:04 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/30 19:23:25 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static int	is_sorted(t_stack **a)
 	while (tmp)
 	{
 		if (prev <= tmp->n)
+		{
+			prev = tmp->n;
 			tmp = tmp->next;
+		}
 		else
 			return (0);
 	}
@@ -43,4 +46,5 @@ void		sort(t_stack **a)
 	if (is_sorted(a))
 		return ;
 	quicksort(a, &b, size, 'a');
+//	print_stack(b);
 }
