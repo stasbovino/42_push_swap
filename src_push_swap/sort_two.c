@@ -5,13 +5,13 @@ void		sort_two(t_stack **a, t_stack **b, char s)
 	if (s == 'a')
 	{
 		if ((*a)->n > (*a)->next->n)
-			swap(a, b, s);
+			make_oper(a, b, s, "swap");
 	}
 	else
 	{
 		if ((*b)->n < (*b)->next->n)
-			swap(a, b, s);
-		push(a, b, s);
-		push(a, b, s);
+			make_oper(a, b, s, "swap");
+		make_oper(a, b, s, "push");
+		make_oper(a, b, s, "push");
 	}
 }

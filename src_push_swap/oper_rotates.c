@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:36:27 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 20:24:29 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/30 22:53:03 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int				rotate(t_stack **a, t_stack **b, char s)
 		*a = (*a)->next;
 		tmp->next = NULL;
 		last->next = tmp;
-		ft_printf("ra\n");
 	}
 	if (s == 'b' && *b && (*b)->next)
 	{
@@ -63,7 +62,6 @@ int				rotate(t_stack **a, t_stack **b, char s)
 		*b = (*b)->next;
 		tmp->next = NULL;
 		last->next = tmp;
-		ft_printf("rb\n");
 	}
 /*	if (s == 'a')
 		ft_printf("ra\n");
@@ -84,7 +82,6 @@ int				rev_rotate(t_stack **a, t_stack **b, char s)
 		tmp->next = *a;
 		*a = tmp;
 		prev->next = NULL;
-		ft_printf("rra\n");
 	}
 	if (s == 'b' && *b && (*b)->next)
 	{
@@ -93,7 +90,6 @@ int				rev_rotate(t_stack **a, t_stack **b, char s)
 		tmp->next = *b;
 		*b = tmp;
 		prev->next = NULL;
-		ft_printf("rrb\n");
 	}
 /*	if (s == 'a')
 		ft_printf("rra\n");

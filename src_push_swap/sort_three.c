@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:36:47 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/30 19:12:53 by sts              ###   ########.fr       */
+/*   Updated: 2019/08/30 21:37:24 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,28 @@ static void	sort_three_b_smart(t_stack **a, t_stack **b, char s)
 	{
 		if ((*b)->n < (*b)->next->next->n)
 		{
-			swap(a, b, s);
-			rotate(a, b, s);
-			swap(a, b, s);
-			rev_rotate(a, b, s);
+			make_oper(a, b, s, "swap");
+			make_oper(a, b, s, "rotate");
+			make_oper(a, b, s, "swap");
+			make_oper(a, b, s, "rev_rotate");
 		}
 		if ((*b)->n < (*b)->next->n)
-			swap(a, b, s);
+			make_oper(a, b, s, "swap");
 	}
 	else if ((*b)->n > (*b)->next->n)
 	{
 		if ((*b)->next->n < (*b)->next->next->n)
 		{
-			rotate(a, b, s);
-			swap(a, b, s);
-			rev_rotate(a, b, s);
+			make_oper(a, b, s, "rotate");
+			make_oper(a, b, s, "swap");
+			make_oper(a, b, s, "rev_rotate");
 			if ((*b)->n < (*b)->next->n)
-				swap(a, b, s);
+				make_oper(a, b, s, "swap");
 		}
 	}
-	push(a, b, s);
-	push(a, b, s);
-	push(a, b, s);
+	make_oper(a, b, s, "push");
+	make_oper(a, b, s, "push");
+	make_oper(a, b, s, "push");
 }
 
 static void	sort_three_b(t_stack **a, t_stack **b, char s)
@@ -47,22 +47,22 @@ static void	sort_three_b(t_stack **a, t_stack **b, char s)
 	if ((*b)->n < (*b)->next->n)
 	{
 		if ((*b)->n < (*b)->next->next->n)
-			rotate(a, b, s);
+			make_oper(a, b, s, "rotate");
 		if ((*b)->n < (*b)->next->n)
-			swap(a, b, s);
+			make_oper(a, b, s, "swap");
 	}
 	else if ((*b)->n > (*b)->next->n)
 	{
 		if ((*b)->next->n < (*b)->next->next->n)
 		{
-			rev_rotate(a, b, s);
+			make_oper(a, b, s, "rev_rotate");
 			if ((*b)->n < (*b)->next->n)
-				swap(a, b, s);
+				make_oper(a, b, s, "swap");
 		}
 	}
-	push(a, b, s);
-	push(a, b, s);
-	push(a, b, s);
+	make_oper(a, b, s, "push");
+	make_oper(a, b, s, "push");
+	make_oper(a, b, s, "push");
 }
 
 static void	sort_three_a_smart(t_stack **a, t_stack **b, char s)
@@ -71,23 +71,23 @@ static void	sort_three_a_smart(t_stack **a, t_stack **b, char s)
 	{
 		if ((*a)->n > (*a)->next->next->n)
 		{
-			swap(a, b, s);
-			rotate(a, b, s);
-			swap(a, b, s);
-			rev_rotate(a, b, s);
+			make_oper(a, b, s, "swap");
+			make_oper(a, b, s, "rotate");
+			make_oper(a, b, s, "swap");
+			make_oper(a, b, s, "rev_rotate");
 		}
 		if ((*a)->n > (*a)->next->n)
-			swap(a, b, s);
+			make_oper(a, b, s, "swap");
 	}
 	else if ((*a)->n < (*a)->next->n)
 	{
 		if ((*a)->next->n > (*a)->next->next->n)
 		{
-			rotate(a, b, s);
-			swap(a, b, s);
-			rev_rotate(a, b, s);
+			make_oper(a, b, s, "rotate");
+			make_oper(a, b, s, "swap");
+			make_oper(a, b, s, "rev_rotate");
 			if ((*a)->n > (*a)->next->n)
-				swap(a, b, s);
+				make_oper(a, b, s, "swap");
 		}
 	}
 }
@@ -97,17 +97,17 @@ static void	sort_three_a(t_stack **a, t_stack **b, char s)
 	if ((*a)->n > (*a)->next->n)
 	{
 		if ((*a)->n > (*a)->next->next->n)
-			rotate(a, b, s);
+			make_oper(a, b, s, "rotate");
 		if ((*a)->n > (*a)->next->n)
-			swap(a, b, s);
+			make_oper(a, b, s, "swap");
 	}
 	else if ((*a)->n < (*a)->next->n)
 	{
 		if ((*a)->next->n > (*a)->next->next->n)
 		{
-			rev_rotate(a, b, s);
+			make_oper(a, b, s, "rev_rotate");
 			if ((*a)->n > (*a)->next->n)
-				swap(a, b, s);
+				make_oper(a, b, s, "swap");
 		}
 	}
 }

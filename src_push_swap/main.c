@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:36:52 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/30 19:23:04 by sts              ###   ########.fr       */
+/*   Updated: 2019/08/30 23:02:33 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int		error(void)
 int		main(int argc, char **argv)
 {
 	t_stack *a;
+	char	*oper;
 
 	if (argc <= 1)
 		return (error());
@@ -85,6 +86,10 @@ int		main(int argc, char **argv)
 	a = create_stack(argc, argv);
 //	print_stack(a);
 	sort(&a);
+	oper = make_oper(NULL, NULL, 'a', "get");
+	ft_printf("%s", oper);
+	free(oper);
+//	ft_printf("\x1b[31m%s\x1b[0m", oper);
 //	print_stack(a);
 	free_stack(&a);
 	return (0);

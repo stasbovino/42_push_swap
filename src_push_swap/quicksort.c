@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:20:10 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/30 20:49:11 by sts              ###   ########.fr       */
+/*   Updated: 2019/08/30 22:22:48 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,23 @@ int				separation(t_stack **a, t_stack **b, char s, int size)
 	while (++i < size)
 	{
 		if ((s == 'a' && (tmp->n <= median)) || (s == 'b' && (tmp->n >= median)))
-			count_push += push(a, b, s);
+		{
+			count_push++;
+			make_oper(a, b, s, "push");
+		}
 		else
-			count_rot += rotate(a, b, s);
+		{
+			count_rot++;
+			make_oper(a, b, s, "rotate");
+		}
 		tmp = (s == 'a') ? *a : *b;
 	}
 	if (((s == 'a') ? count_stacklen(*a) : count_stacklen(*b)) != count_rot)
 		while (count_rot != 0)
-			count_rot -= rev_rotate(a, b, s);
+		{
+			count_rot--;	
+			make_oper(a, b, s, "rev_rotate");
+		}
 	return (count_push);
 }
 
@@ -82,7 +91,7 @@ void			quicksort(t_stack **a, t_stack **b, int size, char s)
 	int		count_push;
 
 	if (size == 1 && s == 'b')
-		push(a, b, s);
+		make_oper(a, b, s, "push");
 	if (size == 2)
 		sort_two(a, b, s);
 	if (size == 3)

@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:36:34 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/29 20:25:16 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/08/30 22:52:44 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int				push(t_stack **a, t_stack **b, char s)
 		(*a)->next = *b;
 		*b = *a;
 		*a = tmp;
-		ft_printf("pb\n");
 	}
 	else if (s == 'b' && *b)
 	{
@@ -30,7 +29,6 @@ int				push(t_stack **a, t_stack **b, char s)
 		(*b)->next = *a;
 		*a = *b;
 		*b = tmp;
-		ft_printf("pa\n");
 	}
 	return (1);
 }
@@ -44,14 +42,12 @@ void			swap(t_stack **a, t_stack **b, char s)
 		tmp = (*a)->next->n;
 		(*a)->next->n = (*a)->n;
 		(*a)->n = tmp;
-		ft_printf("sa\n");
 	}
 	if (s == 'b' && *b && (*b)->next)
 	{
 		tmp = (*b)->next->n;
 		(*b)->next->n = (*b)->n;
 		(*b)->n = tmp;
-		ft_printf("sb\n");
 	}
 /*	if (s == 'a')
 		ft_printf("sa\n");

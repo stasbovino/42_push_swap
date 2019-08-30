@@ -17,21 +17,22 @@ typedef struct	s_lst
 }				t_lst;
 
 t_stack		*create_stack(int argc, char **argv);
-int			error(void);
 void		free_stack(t_stack **a);
 int			count_stacklen(t_stack *a);
 
+char		*make_oper(t_stack **a, t_stack **b, char s, char *oper);
+void		print_stack(t_stack *a);
+int			error(void);
+
 void		sort(t_stack **a);
 void		quicksort(t_stack **a, t_stack **b, int size, char s);
-void		print_stack(t_stack *a);
+void		sort_three(t_stack **a, t_stack **b, char s);
+void		sort_two(t_stack **a, t_stack **b, char s);
 
 int			push(t_stack **a, t_stack **b, char s);
 void		swap(t_stack **a, t_stack **b, char s);
 int			rotate(t_stack **a, t_stack **b, char s);
 int			rev_rotate(t_stack **a, t_stack **b, char s);
-
-void		sort_three(t_stack **a, t_stack **b, char s);
-void		sort_two(t_stack **a, t_stack **b, char s);
 
 int			check_valid(int argc, char **argv);
 
