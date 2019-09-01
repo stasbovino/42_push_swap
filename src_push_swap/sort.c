@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 20:42:43 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/09/01 16:40:49 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/09/01 21:20:22 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,4 @@ void		sort(t_stack **a)
 	if (is_sorted(a))
 		return ;
 	quicksort(a, &b, size, 'a');
-//	print_stack(b);
 }

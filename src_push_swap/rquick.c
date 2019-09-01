@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:20:10 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/09/01 21:14:37 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/09/01 21:20:05 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int				find_direction(t_stack **a, char s, long long int med)
 	}
 	if (top <= bot)
 	{
-		ft_printf("top %d vs bot %d\n", top, bot);
 		return (1);
 	}
 	return (0);
@@ -119,13 +118,9 @@ int				separation(t_stack **a, t_stack **b, char s, int size)
 	count_push = count_to_push((s == 'a') ? *a : *b, s, median);
 	i = count_push;
 	tmp = (s == 'a') ? *a : *b;
-	ft_printf("\x1b[32mSTACK %c:%d MED IS %lld\nPUSHES ARE %d\n\x1b[0m\n", s, size, median, count_push);
 	while (count_push)
 	{
 		direction = find_direction(a, s, median);
-		print_stack(*a);
-		print_stack(*b);
-		ft_printf("stack %c direction is: %d\n\n", s, direction);
 		if ((s == 'a' && (tmp->n <= median)) || (s == 'b' && (tmp->n > median)))
 		{
 			count_push--;
@@ -153,15 +148,9 @@ int				separation(t_stack **a, t_stack **b, char s, int size)
 		}
 		tmp = (s == 'a') ? *a : *b;
 	}
-	print_stack(*a);
-	print_stack(*b);
-	ft_printf("stack %c direction is: %d\n\n", s, direction);
-	ft_printf(" rot: %d\nrrot: %d\n\n", count_rot, count_rrot + 1);
-	ft_printf("size = %d\ncount_push = %d\n\n", size, i);
 	if (((s == 'a') ? count_stacklen(*a) : count_stacklen(*b)) != (size - i))
 		while (count_rot != (count_rrot + 1))
 		{
-			ft_printf("count_rot %d\n countrrot %d\n\n", count_rot, count_rrot + 1);
 			if (count_rot < count_rrot)
 			{
 				make_oper(a, b, s, "rotate");
@@ -173,9 +162,6 @@ int				separation(t_stack **a, t_stack **b, char s, int size)
 				count_rrot++;
 			}
 		}
-	ft_printf("\x1b[32mSTACKS AFTER ROTS\x1b[0m\n");
-	print_stack(*a);
-	print_stack(*b);
 	return (i);
 }
 
@@ -191,18 +177,10 @@ void			quicksort(t_stack **a, t_stack **b, int size, char s)
 		sort_three(a, b, s);
 	if (size >= 1 && size <= 3)
 	{
-/*		ft_printf("\nsorted %d at %c:\na is: ", size, s);
-		print_stack(*a);
-		ft_printf("b is: ");
-		print_stack(*b);
-*/		return ;
+		return ;
 	}
 	count_push = separation(a, b, s, size);
-/*	ft_printf("\nseparated:\na is: ");
-	print_stack(*a);
-	ft_printf("b is: ");
-	print_stack(*b);
-*/	if (s == 'a')
+	if (s == 'a')
 	{
 		quicksort(a, b, size - count_push, 'a');
 		quicksort(a, b, count_push, 'b');

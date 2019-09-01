@@ -15,7 +15,7 @@ typedef struct	s_lst
 	char			*s;
 	struct s_lst	*next;
 }				t_lst;
-
+int             separation(t_stack **a, t_stack **b, char s, int size);
 t_stack		*create_stack(int argc, char **argv);
 void		free_stack(t_stack **a);
 int			count_stacklen(t_stack *a);
