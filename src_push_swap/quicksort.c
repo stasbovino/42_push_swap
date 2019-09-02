@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:20:10 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/09/01 21:20:05 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/09/02 00:44:29 by sts              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ int				find_direction(t_stack **a, char s, long long int med)
 	int		top;
 	int		bot;
 	t_stack	*last;
-	int		stacklen;
 
 	tmp = *a;
 	top = 0;
-	stacklen = count_stacklen(*a);
 	bot = 0;
 	last = NULL;
 	while (tmp)
