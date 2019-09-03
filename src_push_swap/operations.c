@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/03 16:52:25 by gwyman-m          #+#    #+#             */
+/*   Updated: 2019/09/03 17:35:24 by gwyman-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /*
@@ -7,7 +19,35 @@
 **	if 's' - place in oper string with all previous operations
 */
 
-void	place_new_oper(char **list, char s, char *oper)
+void	place_new_oper_rotates(char **list, char s, char *oper)
+{
+	int		len;
+	char	*search;
+	char	*toplace;
+
+	len = ft_strlen(*list);
+	if (ft_strequ(oper, "rotate"))
+	{
+		search = (s == 'a') ? "rb\n" : "ra\n";
+		toplace = (s == 'a') ? "ra\n" : "rb\n";
+		if (len > 2 && ft_strnstr(*list + (len - 3), search, 3)
+				&& (*list)[len - 4] != 'r')
+			(*list)[len - 2] = 'r';
+		else
+			*list = ft_strrejoin(*list, toplace);
+	}
+	else if (ft_strequ(oper, "rev_rotate"))
+	{
+		search = (s == 'a') ? "rrb\n" : "rra\n";
+		toplace = (s == 'a') ? "rra\n" : "rrb\n";
+		if (len > 3 && ft_strnstr(*list + (len - 4), search, 4))
+			(*list)[len - 2] = 'r';
+		else
+			*list = ft_strrejoin(*list, toplace);
+	}
+}
+
+void	place_new_oper_all(char **list, char s, char *oper)
 {
 	int		len;
 	char	*search;
@@ -28,24 +68,8 @@ void	place_new_oper(char **list, char s, char *oper)
 		toplace = (s == 'a') ? "pb\n" : "pa\n";
 		*list = ft_strrejoin(*list, toplace);
 	}
-	else if (ft_strequ(oper, "rotate"))
-	{
-		search = (s == 'a') ? "rb\n" : "ra\n";
-		toplace = (s == 'a') ? "ra\n" : "rb\n";
-		if (len > 2 && ft_strnstr(*list + (len - 3), search, 3) && (*list)[len - 4] != 'r')
-			(*list)[len - 2] = 'r';
-		else
-			*list = ft_strrejoin(*list, toplace);
-	}
-	else if (ft_strequ(oper, "rev_rotate"))
-	{
-		search = (s == 'a') ? "rrb\n" : "rra\n";
-		toplace = (s == 'a') ? "rra\n" : "rrb\n";
-		if (len > 3 && ft_strnstr(*list + (len - 4), search, 4))
-			(*list)[len - 2] = 'r';
-		else
-			*list = ft_strrejoin(*list, toplace);
-	}
+	else
+		place_new_oper_rotates(list, s, oper);
 }
 
 char	*make_oper(t_stack **a, t_stack **b, char s, char *oper)
@@ -66,7 +90,7 @@ char	*make_oper(t_stack **a, t_stack **b, char s, char *oper)
 			rotate(a, b, s);
 		else if (ft_strequ(oper, "rev_rotate"))
 			rev_rotate(a, b, s);
-		place_new_oper(&list, s, oper);
+		place_new_oper_all(&list, s, oper);
 	}
 	return (NULL);
 }

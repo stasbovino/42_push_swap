@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:36:34 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/30 22:52:44 by sts              ###   ########.fr       */
+/*   Updated: 2019/09/03 16:51:34 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,4 @@ void			swap(t_stack **a, t_stack **b, char s)
 		(*b)->next->n = (*b)->n;
 		(*b)->n = tmp;
 	}
-/*	if (s == 'a')
-		ft_printf("sa\n");
-	else
-		ft_printf("sb\n");*/
 }

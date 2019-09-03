@@ -6,80 +6,75 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:20:10 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/09/02 14:26:00 by sts              ###   ########.fr       */
+/*   Updated: 2019/09/03 17:30:20 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int				count_stacklen(t_stack *a)
+int				count_to_push(t_stack *a, char s, long long int med)
 {
+	t_stack *tmp;
 	int		i;
-	t_stack	*tmp;
 
 	tmp = a;
 	i = 0;
 	while (tmp)
 	{
-		i++;
+		if ((s == 'a' && tmp->n <= med) || (s == 'b' && tmp->n > med))
+			i++;
 		tmp = tmp->next;
 	}
 	return (i);
 }
 
-long long int	count_median(t_stack *a, int size)
+void			make_order_right(t_stack **a, char s, int size, int count_rot)
 {
-	int		i;
-	int		sum;
-	t_stack	*tmp;
-	int		ret;
+	int stacklen;
 
-	sum = 0;
-	i = -1;
-	tmp = a;
-	while (++i < size)
-	{
-		sum += tmp->n;
-		tmp = tmp->next;
-	}
-	ret = sum / size;
-	return (ret);
+	stacklen = count_stacklen(*a);
+	if (size != stacklen && stacklen != count_rot)
+		while (count_rot != 0)
+		{
+			count_rot--;
+			if (s == 'a')
+				make_oper(a, NULL, s, "rev_rotate");
+			else
+				make_oper(NULL, a, s, "rev_rotate");
+		}
+}
+
+int				make_push_or_rotate(t_stack **a, t_stack **b, char s, int opt)
+{
+	if (opt == 1)
+		make_oper(a, b, s, "push");
+	else
+		make_oper(a, b, s, "rotate");
+	return (1);
 }
 
 int				separation(t_stack **a, t_stack **b, char s, int size)
 {
-	long long int	median;
+	long long int	med;
 	t_stack			*tmp;
-	int				i;
+	int				ret;
 	int				count_rot;
 	int				count_push;
 
-	i = -1;
-	count_push = 0;
 	count_rot = 0;
-	median = (s == 'a') ? count_median(*a, size) : count_median(*b, size);
-	tmp = (s == 'a') ? *a : *b;
-	while (++i < size)
+	med = (s == 'a') ? count_median(*a, size) : count_median(*b, size);
+	count_push = count_to_push((s == 'a') ? *a : *b, s, med);
+	ret = count_push;
+	while (count_push > 0)
 	{
-		if ((s == 'a' && (tmp->n <= median)) || (s == 'b' && (tmp->n >= median)))
-		{
-			count_push++;
-			make_oper(a, b, s, "push");
-		}
-		else
-		{
-			count_rot++;
-			make_oper(a, b, s, "rotate");
-		}
 		tmp = (s == 'a') ? *a : *b;
+		if ((s == 'a' && (tmp->n <= med)) || (s == 'b' && (tmp->n > med)))
+			count_push -= make_push_or_rotate(a, b, s, 1);
+		else
+			count_rot += make_push_or_rotate(a, b, s, 0);
 	}
-	if (((s == 'a') ? count_stacklen(*a) : count_stacklen(*b)) != count_rot)
-		while (count_rot != 0)
-		{
-			count_rot--;	
-			make_oper(a, b, s, "rev_rotate");
-		}
-	return (count_push);
+	make_order_right((s == 'a') ? a : b, s, size, count_rot);
+	return (ret);
 }
 
 void			quicksort(t_stack **a, t_stack **b, int size, char s)

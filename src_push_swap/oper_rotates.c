@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:36:27 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/30 22:53:03 by sts              ###   ########.fr       */
+/*   Updated: 2019/09/03 16:52:02 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,6 @@ int				rotate(t_stack **a, t_stack **b, char s)
 		tmp->next = NULL;
 		last->next = tmp;
 	}
-/*	if (s == 'a')
-		ft_printf("ra\n");
-	else
-		ft_printf("rb\n"); */
 	return (1);
 }
 
@@ -91,9 +87,5 @@ int				rev_rotate(t_stack **a, t_stack **b, char s)
 		*b = tmp;
 		prev->next = NULL;
 	}
-/*	if (s == 'a')
-		ft_printf("rra\n");
-	else
-		ft_printf("rrb\n");*/
 	return (1);
 }

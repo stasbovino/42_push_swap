@@ -1,29 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_two.c                                         :+:      :+:    :+:   */
+/*   count.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/03 16:52:10 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/09/03 16:52:16 by gwyman-m         ###   ########.fr       */
+/*   Created: 2019/09/03 17:05:36 by gwyman-m          #+#    #+#             */
+/*   Updated: 2019/09/03 17:05:40 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		sort_two(t_stack **a, t_stack **b, char s)
+int				count_stacklen(t_stack *a)
 {
-	if (s == 'a')
+	int		i;
+	t_stack	*tmp;
+
+	tmp = a;
+	i = 0;
+	while (tmp)
 	{
-		if ((*a)->n > (*a)->next->n)
-			make_oper(a, b, s, "swap");
+		i++;
+		tmp = tmp->next;
 	}
-	else
+	return (i);
+}
+
+long long int	count_median(t_stack *a, int size)
+{
+	int		i;
+	int		sum;
+	t_stack	*tmp;
+	int		ret;
+
+	sum = 0;
+	i = -1;
+	tmp = a;
+	while (++i < size)
 	{
-		if ((*b)->n < (*b)->next->n)
-			make_oper(a, b, s, "swap");
-		make_oper(a, b, s, "push");
-		make_oper(a, b, s, "push");
+		sum += tmp->n;
+		tmp = tmp->next;
 	}
+	ret = sum / size;
+	return (ret);
 }

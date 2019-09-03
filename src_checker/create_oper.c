@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 19:10:31 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/30 15:15:48 by sts              ###   ########.fr       */
+/*   Updated: 2019/09/03 16:50:40 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,35 +91,6 @@ int				read_to_lst(t_lst **begin, t_lst **lst)
 	return (0);
 }
 
-/*
-int				read_to_lst(t_lst **begin, t_lst **lst)
-{
-	char	*buf;
-	int		r;
-
-	r = 0;
-	buf = ft_strnew(4);
-	while ((r = read(0, buf, 4)))
-	{
-		if (r == -1)
-			return (checker_error(begin, &buf));
-		if (r == 3)
-			buf[2] = '\0';
-		else if (r == 4)
-			buf[3] = '\0';
-		else
-			return (checker_error(begin, &buf));
-		(*lst)->next = create_lst(buf);
-		(*lst) = (*lst)->next;
-		free(buf);
-		buf = ft_strnew(4);
-		if (check_valid_oper((*lst)->s) == -1)
-			return (checker_error(begin, &buf));
-	}
-	free(buf);
-	return (0);
-}
-*/
 int				create_oper(char ***oper)
 {
 	t_lst	*lst;

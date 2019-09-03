@@ -6,7 +6,7 @@
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 22:38:01 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/08/28 23:56:11 by gwyman-m         ###   ########.fr       */
+/*   Updated: 2019/09/03 21:57:14 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	check_isnum(char *num)
 	int i;
 
 	i = (num[0] == '-') ? 0 : -1;
+	if (!num[i + 1])
+		return (1);
 	while (num[++i])
 		if (!(num[i] >= '0' && num[i] <= '9'))
 			return (1);

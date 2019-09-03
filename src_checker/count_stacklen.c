@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_two.c                                         :+:      :+:    :+:   */
+/*   count_stacklen.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/03 16:52:10 by gwyman-m          #+#    #+#             */
-/*   Updated: 2019/09/03 16:52:16 by gwyman-m         ###   ########.fr       */
+/*   Created: 2019/09/03 21:48:39 by gwyman-m          #+#    #+#             */
+/*   Updated: 2019/09/03 21:49:42 by gwyman-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		sort_two(t_stack **a, t_stack **b, char s)
+int				count_stacklen(t_stack *a)
 {
-	if (s == 'a')
+	int		i;
+	t_stack	*tmp;
+
+	tmp = a;
+	i = 0;
+	while (tmp)
 	{
-		if ((*a)->n > (*a)->next->n)
-			make_oper(a, b, s, "swap");
+		i++;
+		tmp = tmp->next;
 	}
-	else
-	{
-		if ((*b)->n < (*b)->next->n)
-			make_oper(a, b, s, "swap");
-		make_oper(a, b, s, "push");
-		make_oper(a, b, s, "push");
-	}
+	return (i);
 }
