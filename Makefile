@@ -6,7 +6,7 @@
 #    By: gwyman-m <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/28 23:35:25 by gwyman-m          #+#    #+#              #
-#    Updated: 2019/09/03 21:52:22 by gwyman-m         ###   ########.fr        #
+#    Updated: 2019/11/10 00:21:44 by sts              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ PUSH_SWAP = push_swap
 CHECKER = checker
 
 FLAGS = -g -Wall -Wextra -Werror -I. -I libft/
+
 LIB = -L libft/ -lft
 
 PUSH_SWAP_SRC_DIR= src_push_swap/
@@ -35,18 +36,46 @@ PUSH_SWAP_SRC = $(addprefix $(PUSH_SWAP_SRC_DIR),$(CPUSH_SWAP))
 
 CHECKER_SRC = $(addprefix $(CHECKER_SRC_DIR),$(CCHECKER))
 
-all: $(PUSH_SWAP) $(CHECKER)
+PUSH_SWAP_OBJ = $(PUSH_SWAP_SRC:%.c=%.o)
 
-$(PUSH_SWAP): $(PUSH_SWAP_SRC) $(HEADER)
-	make -C libft/
-	gcc $(FLAGS) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) $(LIB)
+CHECKER_OBJ = $(CHECKER_SRC:%.c=%.o)
+
+submodule = `git submodule | grep "-"`
+
+RULE=$(firstword $(MAKECMDGOALS))
+
+.PHONY: subm all clean fclean re
+
+.SILENT: subm
+
+all: subm $(PUSH_SWAP) $(CHECKER)
+
+subm:
+	if [[ -n $(submodule) ]]; then\
+		git submodule init;\
+		git submodule update;\
+	fi
+
+$(PUSH_SWAP): $(PUSH_SWAP_OBJ) $(HEADER)
+	make -C libft
+	gcc $(FLAGS) $(PUSH_SWAP_OBJ) -o $(PUSH_SWAP) $(LIB)
+
+$(PUSH_SWAP_SRC_DIR)%.o : $(PUSH_SWAP_SRC_DIR)%.c $(HEADER)
+	gcc $(FLAGS) $< -o $@
 
 $(CHECKER): $(CHECKER_SRC) $(HEADER)
-	make -C libft/
-	gcc $(FLAGS) $(CHECKER_SRC) -o $(CHECKER) $(LIB)
+	make -C libft
+	gcc $(FLAGS) $(CHECKER_OBJ) -o $(CHECKER) $(LIB)
+
+$(CHECKER_SRC_DIR)%.o : $(CHECKER_SRC_DIR)%.c $(HEADER)
+	gcc $(FLAGS) $< -o $@
 
 clean:
-	make clean -C libft/
+	@rm -f $(OBJ)
+ifneq ($(RULE), $(filter $(RULE), fclean re))
+	@make clean -C libft/
+endif
+	@echo "\033[0;33mthe src directories are cleaned\033[0m"
 
 fclean: clean
 	make fclean -C libft/
